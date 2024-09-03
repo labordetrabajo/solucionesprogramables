@@ -30,6 +30,44 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <script>
+		$(document).ready(function() {
+		  $("#contact-form").submit(function(event) {
+			// Stop the form from submitting normally
+			event.preventDefault();
+	  
+			// Get the form data
+			var formData = {
+			  name: $("input#sender_name").val(),
+			  email: $("input#sender_email").val(),
+			  message: $("textarea#message_content").val()
+			};
+	  
+			// Submit the form using Formspree
+			$.ajax({
+			  url: "https://formspree.io/f/xeqwvvne",
+			  method: "POST",
+			  data: formData,
+			  dataType: "json",
+			  success: function() {
+				// Show the success message
+				$(".contact__response--success").show();
+				$(".contact__response--error").hide();
+				$("input#sender_name").val("");
+				$("input#sender_email").val("");
+				$("textarea#message_content").val("");
+			  },
+			  error: function() {
+				// Show the error message
+				$(".contact__response--success").hide();
+				$(".contact__response--error").show();
+			  }
+			});
+		  });
+		});
+	  </script>
+
+
 
 </head>
 
