@@ -56,16 +56,21 @@ $(document).ready(function() {
             // Ocultar la animación de "loading"
             $(".loading").hide();
 
-            // Mostrar el mensaje de éxito y ocultar el de error
+            // Verifica si la respuesta es exitosa
             if (response.ok) {
+               // Mostrar el mensaje de éxito y ocultar el de error
                $(".sent-message").show();
                $(".error-message").hide();
+               
+               // Limpiar los campos del formulario
+               $("input#sender_name").val("");
+               $("input#sender_email").val("");
+               $("textarea#message_content").val("");
+            } else {
+               // Mostrar mensaje de error si la respuesta no es exitosa
+               $(".error-message").show();
+               $(".sent-message").hide();
             }
-
-            // Limpiar los campos del formulario
-            $("input#sender_name").val("");
-            $("input#sender_email").val("");
-            $("textarea#message_content").val("");
          },
          error: function() {
             // Ocultar la animación de "loading"
@@ -78,6 +83,7 @@ $(document).ready(function() {
       });
    });
 });
+
  </script>
 
 
