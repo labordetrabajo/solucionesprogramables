@@ -13,7 +13,7 @@
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
- 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -31,41 +31,34 @@
   <link href="assets/css/main.css" rel="stylesheet">
 
   <script>
-		$(document).ready(function() {
-		  $("#contact-form").submit(function(event) {
-			// Stop the form from submitting normally
-			event.preventDefault();
-	  
-			// Get the form data
-			var formData = {
-			  name: $("input#sender_name").val(),
-			  email: $("input#sender_email").val(),
-			  message: $("textarea#message_content").val()
-			};
-	  
-			// Submit the form using Formspree
-			$.ajax({
-			  url: "https://formspree.io/f/xeqwvvne",
-			  method: "POST",
-			  data: formData,
-			  dataType: "json",
-			  success: function() {
-				// Show the success message
-				$(".contact__response--success").show();
-				$(".contact__response--error").hide();
-				$("input#sender_name").val("");
-				$("input#sender_email").val("");
-				$("textarea#message_content").val("");
-			  },
-			  error: function() {
-				// Show the error message
-				$(".contact__response--success").hide();
-				$(".contact__response--error").show();
-			  }
-			});
-		  });
-		});
-	  </script>
+    $(document).ready(function() {
+       $("#contact-form").submit(function(event) {
+          event.preventDefault();
+          var formData = {
+             name: $("input#sender_name").val(),
+             email: $("input#sender_email").val(),
+             message: $("textarea#message_content").val()
+          };
+          $.ajax({
+             url: "https://formspree.io/f/xeqwvvne",
+             method: "POST",
+             data: formData,
+             dataType: "json",
+             success: function() {
+                $(".contact__response--success").show();
+                $(".contact__response--error").hide();
+                $("input#sender_name").val("");
+                $("input#sender_email").val("");
+                $("textarea#message_content").val("");
+             },
+             error: function() {
+                $(".contact__response--success").hide();
+                $(".contact__response--error").show();
+             }
+          });
+       });
+    });
+ </script>
 
 
 
@@ -722,36 +715,27 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" id="nombre" class="form-control" placeholder="NOMBRE" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" id="correo" name="email" placeholder="CORREO" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" id="asunto" name="subject" placeholder="ASUNTO" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" id="mensaje" rows="4" placeholder="MENSAJE" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Su Mensaje fue enviado , Gracias !</div>
-
-                  <button type="submit">Mensaje Enviado</button>
-                </div>
-
-              </div>
+            <form id="contact-form" action="https://formspree.io/f/xeqwvvne" method="POST" class="php-email-form">
+               <div class="row gy-4">
+                  <div class="col-md-6">
+                     <input type="text" name="name" id="sender_name" class="form-control" placeholder="NOMBRE" required="">
+                  </div>
+                  <div class="col-md-6 ">
+                     <input type="email" class="form-control" id="sender_email" name="email" placeholder="CORREO" required="">
+                  </div>
+                  <div class="col-md-12">
+                     <textarea class="form-control" name="message" id="message_content" rows="4" placeholder="MENSAJE" required=""></textarea>
+                  </div>
+                  <div class="col-md-12 text-center">
+                     <div class="loading">Loading</div>
+                     <div class="error-message"></div>
+                     <div class="sent-message">Su Mensaje fue enviado , Gracias !</div>
+                     <button type="submit">Enviar Mensaje</button>
+                  </div>
+               </div>
             </form>
-          </div><!-- End Contact Form -->
+         </div>
+         
 
         </div>
 
