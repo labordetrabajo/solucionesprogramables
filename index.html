@@ -32,32 +32,50 @@
 
   <script>
     $(document).ready(function() {
-       $("#contact-form").submit(function(event) {
-          event.preventDefault();
-          var formData = {
-             name: $("input#sender_name").val(),
-             email: $("input#sender_email").val(),
-             message: $("textarea#message_content").val()
-          };
-          $.ajax({
-             url: "https://formspree.io/f/xeqwvvne",
-             method: "POST",
-             data: formData,
-             dataType: "json",
-             success: function() {
-                $(".contact__response--success").show();
-                $(".contact__response--error").hide();
-                $("input#sender_name").val("");
-                $("input#sender_email").val("");
-                $("textarea#message_content").val("");
-             },
-             error: function() {
-                $(".contact__response--success").hide();
-                $(".contact__response--error").show();
-             }
-          });
-       });
-    });
+   $("#contact-form").submit(function(event) {
+      // Evitar el comportamiento por defecto del formulario
+      event.preventDefault();
+
+      // Mostrar la animación de "loading"
+      $(".loading").show();
+
+      // Obtener los datos del formulario
+      var formData = {
+         name: $("input#sender_name").val(),
+         email: $("input#sender_email").val(),
+         message: $("textarea#message_content").val()
+      };
+
+      // Enviar el formulario usando AJAX
+      $.ajax({
+         url: "https://formspree.io/f/xeqwvvne",
+         method: "POST",
+         data: formData,
+         dataType: "json",
+         success: function() {
+            // Ocultar la animación de "loading"
+            $(".loading").hide();
+
+            // Mostrar el mensaje de éxito y ocultar el de error
+            $(".sent-message").show();
+            $(".error-message").hide();
+
+            // Limpiar los campos del formulario
+            $("input#sender_name").val("");
+            $("input#sender_email").val("");
+            $("textarea#message_content").val("");
+         },
+         error: function() {
+            // Ocultar la animación de "loading"
+            $(".loading").hide();
+
+            // Mostrar el mensaje de error y ocultar el de éxito
+            $(".error-message").show();
+            $(".sent-message").hide();
+         }
+      });
+   });
+});
  </script>
 
 
