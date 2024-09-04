@@ -68,8 +68,7 @@ $(document).ready(function() {
                $("textarea#message_content").val("");
             } else {
                // Mostrar mensaje de error si la respuesta no es exitosa
-               $(".error-message").show();
-               $(".sent-message").hide();
+             
             }
          },
          error: function(xhr, status, error) {
@@ -79,7 +78,7 @@ $(document).ready(function() {
             // Mostrar el mensaje de error y ocultar el de éxito
             $(".error-message").show();
             $(".sent-message").hide();
-            console.error("Error: " + xhr.responseText); // Esto es opcional, para depurar
+          
          }
       });
    });
