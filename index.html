@@ -43,6 +43,7 @@ $(document).ready(function() {
       var formData = {
          name: $("input#sender_name").val(),
          email: $("input#sender_email").val(),
+         subject: $("input#subject").val(),  // Capturar el valor del campo de Asunto
          message: $("textarea#message_content").val()
       };
 
@@ -61,14 +62,13 @@ $(document).ready(function() {
                // Mostrar el mensaje de éxito y ocultar el de error
                $(".sent-message").show();
                
-               
                // Limpiar los campos del formulario
                $("input#sender_name").val("");
                $("input#sender_email").val("");
+               $("input#subject").val("");  // Limpiar el campo de Asunto
                $("textarea#message_content").val("");
             } else {
                // Mostrar mensaje de error si la respuesta no es exitosa
-             
             }
          },
       });
