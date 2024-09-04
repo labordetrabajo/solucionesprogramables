@@ -72,13 +72,14 @@ $(document).ready(function() {
                $(".sent-message").hide();
             }
          },
-         error: function() {
+         error: function(xhr, status, error) {
             // Ocultar la animación de "loading"
             $(".loading").hide();
 
             // Mostrar el mensaje de error y ocultar el de éxito
             $(".error-message").show();
             $(".sent-message").hide();
+            console.error("Error: " + xhr.responseText); // Esto es opcional, para depurar
          }
       });
    });
